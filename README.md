@@ -17,6 +17,9 @@ To preview locally, clone the repo and open the HTML file in your browser.
 
 That's it.
 
+The site is in the "docs" folder because it's deployed with GitHub Pages which
+seems to only accept a folder named "docs".
+
 ## Prior art
 
 I didn't do a web search before making this, but apparently someone else had the
