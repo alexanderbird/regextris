@@ -6,134 +6,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟨</text></svg>">
+  <link rel="stylesheet" href="./regextris.css"></link>
+  <script src='./regextris.js'></script>
 </head>
 <body class='game'>
-  <style>
-    body {
-      --square: 12px;
-      --gap: 2px;
-      --rows: 24;
-      --columns: 24;
-      --column-width: calc(var(--square) + calc(5 * var(--gap)));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    body > *:first-child {
-      margin-top: auto;
-    }
-    body > *:last-child {
-      margin-bottom: auto;
-    }
-    .tile {
-      width: var(--square);
-      height: var(--square);
-      line-height: var(--square);
-      text-align: center;
-      border-radius: 2px;
-      padding: calc(2 * var(--gap));
-      margin: calc(0.5 * var(--gap));
-      background-color: var(--color-background);
-      color: var(--color-foreground);
-      transition: margin-bottom 1s;
-    }
-    .tile--new {
-      margin-bottom: calc(var(--rows) * var(--square));
-    }
-    .board {
-      border: 2px solid #222;
-      border-radius: 4px;
-      height: calc(var(--square) * var(--rows));
-      width: auto;
-      display: flex;
-      padding: var(--gap);
-      flex-direction: row;
-      position: relative;
-      overflow: hidden;
-    }
-    .board__column {
-      width: auto;
-      min-width: var(--column-width);
-      display: flex;
-      flex-direction: column-reverse;
-      position: relative;
-      --underline-unit: 4px;
-      margin-bottom: calc(2 * var(--underline-unit));
-    }
-    .board__column:after {
-      content: '';
-      position: absolute;
-      width: 80%;
-      height: var(--underline-unit);
-      --underline-color: transparent;
-      background-color: var(--underline-color);
-      margin: auto;
-      bottom: calc(-2 * var(--underline-unit));
-      left: 0;
-      right: 0;
-      border-radius: 2px;
-    }
-    .board__column--selected:after {
-      --underline-color: #00FFD1;
-    }
-    .game--too-many-colors .board__column--selected:after {
-      --underline-color: #F0153E;
-    }
-    .timer {
-      height: var(--square);
-      margin: var(--square) 0;
-      width: calc(var(--columns) * var(--column-width));
-      position: relative;
-      border-radius: var(--square);
-      overflow: hidden;
-    }
-    .timer:after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 100%;
-      background-color: blue;
-      transition: width var(--tick-time);
-    }
-    .timer--no-transitions:after {
-      transition: none;
-    }
-    .timer--tick:after {
-      width: 100%;
-    }
-    .input {
-      font-size: 40px;
-      padding: 12px;
-      border-radius: 8px;
-    }
-    .input:before {
-      content: '/';
-      color: gray;
-    }
-    .input:after {
-      content: '/g';
-      color: gray;
-    }
-    .input input {
-      border-top: 0;
-      border-right: 0;
-      border-left: 0;
-      outline: 0;
-      width: 6em;
-      font-family: monospace;
-      background-color: transparent;
-      font-size: inherit;
-    }
-    .input input:focus {
-      border-color: blue;
-    }
-    .game.game--too-many-colors .input {
-      background-color: #A0153E22
-    }
-  </style>
   <div class="board">
     <div class="board__column"></div>
     <div class="board__column"></div>
@@ -164,6 +40,5 @@
   <div class="input">
     <input type="text" placeholder="[Aa1]*"></input>
   </div>
-  <script src='./regextris.js'></script>
 </body>
 </html>
