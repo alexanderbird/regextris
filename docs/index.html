@@ -9,36 +9,67 @@
   <link rel="stylesheet" href="./regextris.css"></link>
   <script src='./regextris.js'></script>
 </head>
-<body class='game'>
-  <div class="board">
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-    <div class="board__column"></div>
-  </div>
-  <div class="timer"><div class="timer__slider"></div></div>
-  <div class="input">
-    <input type="text" placeholder="[Aa1]*"></input>
-  </div>
+<body>
+  <header>
+    <h1>RegExtris</h1>
+    <p>Eliminate the falling tiles in real-time with your sweet RegEx skills.</p>
+  </header>
+  <section class="instructions">
+    <h2>Gameplay</h2>
+    <ul>
+      <li>Type some RegEx to match tiles</li>
+      <li>You're matching against the bottom row</li>
+      <li>Empty columns are treated as spaces</li>
+      <li>If you match more than one color, your match is invalid</li>
+      <li>Your regex is applied when the timer expires or when you press Enter</li>
+    </ul>
+    <h2>Regular Expressions</h2>
+    <ul>
+      <li>Use <code>\d</code> to match any digit</li>
+      <li>Use <code>[]</code> to describe a character class</li>
+      <li>Use a range within a character class (e.g. match abcd with <code>[a-d]</code>)</li>
+      <li>Common character class ranges: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code></li>
+      <li>A character class can have several ranges (e.g. match any alphanumeric with <code>[A-Za-z0-9]</code></li>
+      <li>Use <code>^</code> inside square braces to negate a character class to match everything except (e.g. match efgh with <code>[^a-d]</code>)
+      <li>Use <code>+</code> to repeat a character one or more times (e.g. match aaaaaa with <code>a+</code></li>
+      <li>Use <code>*</code> to repeat a character zero or more times (e.g. match aaaaaa or the empty string with <code>a+</code></li>
+      <li>Use <code>{n}</code> to repeat a character n times (e.g. match aaaaaa with <code>a{6}</code></li>
+      <li>Use <code>^</code> to match the start of the line (e.g. match the first a with <code>^a</code></li>
+      <li>Use <code>$</code> to match the end of the line (e.g. match the last a with <code>a$</code></li>
+      <li>Use <code>|</code> to match one thing or another (e.g. match this or that with <code>this|that</code>)</li>
+    </ul>
+  </section>
+  <section class="game">
+    <div class="timer"><div class="timer__slider"></div></div>
+    <div class="board">
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+      <div class="board__column"></div>
+    </div>
+    <div class="input">
+      <input type="text" placeholder="[Aa1]*"></input>
+    </div>
+  </section>
 </body>
 </html>
