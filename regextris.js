@@ -1,27 +1,39 @@
 window.addEventListener('DOMContentLoaded', main);
-const tilesPerTick = 5;
-const tickTime = 10;
+const tilesPerTick = 4;
+const tickTime = 20;
+const letters = 'abcABC123abcABC123abcABC123-'.split('');
 const colors = [
   { id: 1, foreground: '#FFFF80', background: '#26355D' },
   { id: 2, foreground: '#FFFEF8', background: '#AF47D2' },
   { id: 3, foreground: '#5D0E41', background: '#FF8F00' },
-  { id: 4, foreground: '#000000', background: '#FFDB00' } 
 ]
+
+const ENTER_KEY_CODE = 13;
 
 function main() {
   document.body.style.setProperty('--tick-time', `${tickTime}s`);
-  setInterval(() => {
-    onTick();
-  }, tickTime * 1000);
+  let interval = startGameLoop();
   onTick();
-  document.querySelector('.input input').addEventListener('keyup', x => onInputChange());
+  document.querySelector('.input input').addEventListener('keyup', event => {
+    if (event.keyCode === ENTER_KEY_CODE) {
+      clearInterval(interval);
+      interval = startGameLoop();
+      onTick();
+    }
+    onInputChange();
+  });
 }
 
-const letters = 'aA1'.split('');
+function startGameLoop() {
+  return setInterval(() => {
+    onTick();
+  }, tickTime * 1000);
+}
+
 
 function getMatchedTiles() {
   const columns = Array.from(document.querySelectorAll('.board__column'));
-  const regex = parseRegex(document.querySelector('.input input').value.trim());
+  const regex = parseRegex(document.querySelector('.input input').value);
   if (regex) {
     const bottomRow = columns.map(x => x.querySelector('.tile')?.textContent || ' ').join('');
     const matches = bottomRow.match(regex) || [];
@@ -95,7 +107,7 @@ function pick(list) {
 
 function parseRegex(text) {
   try {
-    return new RegExp(text);
+    return new RegExp(text, 'g');
   } catch(ignored) {
     return false;
   }
