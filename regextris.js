@@ -1,8 +1,12 @@
 window.addEventListener('DOMContentLoaded', main);
 const tilesPerTick = 5;
-const hazardRatio = 0.25;
-const consequenceTilesPerHazard = 5;
 const tickTime = 10;
+const colors = [
+  { id: 1, foreground: '#FFFF80', background: '#26355D' },
+  { id: 2, foreground: '#FFFEF8', background: '#AF47D2' },
+  { id: 3, foreground: '#5D0E41', background: '#FF8F00' },
+  { id: 4, foreground: '#000000', background: '#FFDB00' } 
+]
 
 function main() {
   document.body.style.setProperty('--tick-time', `${tickTime}s`);
@@ -16,7 +20,6 @@ const letters = 'aA1'.split('');
 
 function onTick() {
   const columns = Array.from(document.querySelectorAll('.board__column'));
-  let consequences = 0;
 
   const regex = parseRegex(document.querySelector('.input input').value.trim());
   if (regex) {
@@ -30,16 +33,17 @@ function onTick() {
         return result;
       }, [])
     ));
-    matchIndices.forEach(index => {
-      const toRemove = columns[index].querySelector('.tile');
-      if (!toRemove) {
-        return;
-      }
-      if (toRemove.dataset.consequenceTiles) {
-        consequences += Number(toRemove.dataset.consequenceTiles);
-      }
-      columns[index].removeChild(toRemove);
-    });
+    const matchedTiles = matchIndices
+      .map(index => ({ column: columns[index], tile: columns[index].querySelector('.tile') }))
+      .filter(x => !!x.tile);
+
+    const matchedColors = Array.from(new Set(matchedTiles.map(x => x.tile.dataset.color)));
+    if (matchedColors.length > 1) {
+      console.log('multicolor match; doing nothing');
+    } else {
+      matchedTiles.forEach(({ column, tile }) => column.removeChild(tile));
+    }
+
   }
 
   const timer = document.querySelector('.timer');
@@ -47,17 +51,15 @@ function onTick() {
   setTimeout(() => timer.classList.add('timer--tick'), 0);
   setTimeout(() => timer.classList.remove('timer--no-transitions'), 10);
   setTimeout(() => timer.classList.remove('timer--tick'), 20);
-  const tilesToAdd = tilesPerTick + consequences;
-  for (let i = 0; i < tilesToAdd; i++) {
+  for (let i = 0; i < tilesPerTick; i++) {
     const column = pick(columns);
     const tile = document.createElement('div');
     tile.classList.add('tile');
     tile.classList.add('tile--new');
-    const isHazard = Math.random() < hazardRatio;
-    if (isHazard) {
-      tile.dataset.consequenceTiles = consequenceTilesPerHazard;
-      tile.classList.add('tile--hazard');
-    }
+    const color = pick(colors);
+    tile.dataset.color = color.id;
+    tile.style.setProperty('--color-foreground', color.foreground);
+    tile.style.setProperty('--color-background', color.background);
 
     const letter = pick(letters);
     tile.textContent = letter;

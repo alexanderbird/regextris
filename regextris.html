@@ -34,18 +34,14 @@
       line-height: var(--square);
       text-align: center;
       border-radius: 2px;
-      border: 1px solid blue;
-      padding: var(--gap);
+      padding: calc(2 * var(--gap));
       margin: calc(0.5 * var(--gap));
-      background-color: #EEF;
+      background-color: var(--color-background);
+      color: var(--color-foreground);
       transition: margin-bottom 1s;
     }
     .tile--new {
       margin-bottom: calc(var(--rows) * var(--square));
-    }
-    .tile--hazard {
-      background-color: #300;
-      color: #FFE;
     }
     .board {
       border: 2px solid #222;
