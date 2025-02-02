@@ -73,6 +73,22 @@ header h1 {
   position: relative;
   overflow: hidden;
 }
+.game--win .board {
+  background-color: #B0C5A4;
+}
+.game--win .board__column {
+  display: none;
+}
+.game:not(.game--win) .board__you-win {
+  display: none;
+}
+.board__you-win {
+  width: calc(var(--columns) * var(--column-width));
+  display: flex;
+}
+.board__you-win > * {
+  margin: auto;
+}
 .board__column {
   width: auto;
   min-width: var(--column-width);
@@ -116,6 +132,9 @@ header h1 {
   background-color: #07479999;
   border-radius: inherit;
   animation: var(--tick-time) timer linear;
+}
+.game--win .timer__slider {
+  animation: none;
 }
 @keyframes timer {
   from {

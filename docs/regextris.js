@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', main);
-const tilesPerTick = 4;
+const tilesPerTick = 2;
 const tickTime = 20;
 const letters = [
   'abcABC123'.repeat(4),
@@ -16,6 +16,8 @@ const ENTER_KEY_CODE = 13;
 function main() {
   document.body.style.setProperty('--tick-time', `${tickTime}s`);
   let interval = startGameLoop();
+  onTick({ firstTick: true });
+  onTick();
   onTick();
   document.querySelector('.input input').addEventListener('keyup', event => {
     if (event.keyCode === ENTER_KEY_CODE) {
@@ -53,7 +55,7 @@ function getMatchedTiles() {
   return { matchedTiles: [], matchedColors: [] };
 }
 
-function onTick() {
+function onTick({ firstTick } = {}) {
   const columns = Array.from(document.querySelectorAll('.board__column'));
 
   const { matchedColors, matchedTiles } = getMatchedTiles();
@@ -63,6 +65,11 @@ function onTick() {
     onInputChange();
   }
 
+  const gameOver = !firstTick && checkForEndGame();
+
+  if (gameOver) {
+    return;
+  }
   const timerSlider = document.querySelector('.timer__slider');
   timerSlider.style.animation = 'none';
   timerSlider.offsetHeight;
@@ -108,4 +115,13 @@ function parseRegex(text) {
   } catch(ignored) {
     return false;
   }
+}
+
+function checkForEndGame() {
+  const gameIsWon = !document.querySelector('.tile');
+  if (gameIsWon) {
+    document.querySelector('.game').classList.add('game--win');
+  }
+
+  return gameIsWon;
 }
