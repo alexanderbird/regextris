@@ -43,6 +43,10 @@
     .tile--new {
       margin-bottom: calc(var(--rows) * var(--square));
     }
+    .tile--hazard {
+      background-color: #300;
+      color: #FFE;
+    }
     .board {
       border: 2px solid #222;
       border-radius: 4px;
@@ -91,7 +95,7 @@
       color: gray;
     }
     .input:after {
-      content: '/g';
+      content: '/';
       color: gray;
     }
     .input input {
