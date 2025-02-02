@@ -1,12 +1,15 @@
 window.addEventListener('DOMContentLoaded', main);
 const tilesPerTick = 2;
 const tickTime = 20;
+const numberOfPreGameTicks = 6;
 const letters = [
   'abcABC123'.repeat(4),
   '-_'.repeat(2),
   '+^$'
 ].join('').split('')
 const colors = [
+  { id: 1, foreground: '#FFFEF8', background: '#AF47D2' },
+  { id: 1, foreground: '#FFFEF8', background: '#AF47D2' },
   { id: 1, foreground: '#FFFEF8', background: '#AF47D2' },
   { id: 2, foreground: '#5D0E41', background: '#FF8F00' },
 ]
@@ -16,9 +19,9 @@ const ENTER_KEY_CODE = 13;
 function main() {
   document.body.style.setProperty('--tick-time', `${tickTime}s`);
   let interval = startGameLoop();
-  onTick({ firstTick: true });
-  onTick();
-  onTick();
+  for (let i = 0; i < numberOfPreGameTicks; i++) {
+    onTick({ firstTick: true });
+  }
   document.querySelector('.input input').addEventListener('keyup', event => {
     if (event.keyCode === ENTER_KEY_CODE) {
       clearInterval(interval);
