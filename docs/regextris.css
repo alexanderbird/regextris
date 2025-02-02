@@ -85,9 +85,22 @@ header h1 {
 .board__you-win {
   width: calc(var(--columns) * var(--column-width));
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.board__you-win > * {
-  margin: auto;
+.board__you-win button {
+  margin-top: 12px;
+}
+.board__you-win button.play-next-level {
+  background-color: #69247C;
+  color: white;
+}
+.board__you-win > *:first-child {
+  margin-top: auto;
+}
+.board__you-win > *:last-child {
+  margin-bottom: auto;
 }
 .board__column {
   width: auto;

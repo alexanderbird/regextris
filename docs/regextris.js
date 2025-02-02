@@ -1,23 +1,15 @@
 window.addEventListener('DOMContentLoaded', main);
-const tilesPerTick = 2;
-const tickTime = 20;
-const numberOfPreGameTicks = 6;
-const letters = [
-  'abcABC123'.repeat(4),
-  '-_'.repeat(2),
-  '+^$'
-].join('').split('')
-const colors = [
-  { id: 1, foreground: '#FFFEF8', background: '#AF47D2' },
-  { id: 1, foreground: '#FFFEF8', background: '#AF47D2' },
-  { id: 1, foreground: '#FFFEF8', background: '#AF47D2' },
-  { id: 2, foreground: '#5D0E41', background: '#FF8F00' },
-]
+const level = Number(window.localStorage.getItem('level') || 1)
+const { tilesPerTick, tickTime, numberOfPreGameTicks, letters, colors } = getGameConfiguration();
 
 const ENTER_KEY_CODE = 13;
 
 function main() {
   document.body.style.setProperty('--tick-time', `${tickTime}s`);
+  document.querySelector('.data__current-level').textContent = level;
+  document.querySelector('.data__next-level').textContent = level + 1;
+  document.querySelector('.board__you-win .play-next-level').addEventListener('click', playNextLevel);
+  document.querySelector('.board__you-win .play-first-level').addEventListener('click', playFirstLevel);
   let interval = startGameLoop();
   for (let i = 0; i < numberOfPreGameTicks; i++) {
     onTick({ firstTick: true });
@@ -120,6 +112,16 @@ function parseRegex(text) {
   }
 }
 
+function playNextLevel() {
+  window.localStorage.setItem('level', level + 1);
+  window.location.reload();
+}
+
+function playFirstLevel() {
+  window.localStorage.removeItem('level');
+  window.location.reload();
+}
+
 function checkForEndGame() {
   const gameIsWon = !document.querySelector('.tile');
   if (gameIsWon) {
@@ -127,4 +129,57 @@ function checkForEndGame() {
   }
 
   return gameIsWon;
+}
+
+function getGameConfiguration() {
+  const COLOR_1 = { id: 1, foreground: '#FFFEF8', background: '#AF47D2' };
+  const COLOR_2 = { id: 2, foreground: '#5D0E41', background: '#FF8F00' };
+  const COLOR_3 = { id: 2, foreground: '#EAFAEA', background: '#780C28' };
+  const colorsSplit25To75 = [COLOR_1, COLOR_1, COLOR_1, COLOR_2];
+  const colorsSplit30To70 = [COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_2, COLOR_2, COLOR_2];
+  const colorsSplit30To60To10 = [COLOR_3, COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_2, COLOR_2, COLOR_2];
+  const baseConfigLevels1To3 = {
+    tilesPerTick: 2,
+    tickTime: 20,
+    numberOfPreGameTicks: 6
+  }
+  if (level === 1) {
+    return { ...baseConfigLevels1To3, letters: 'A'.split(''), colors: [COLOR_1] };
+  }
+  if (level === 2) {
+    return { ...baseConfigLevels1To3, letters: 'A1'.split(''), colors: colorsSplit25To75 };
+  }
+  if (level === 3) {
+    return { ...baseConfigLevels1To3, letters: 'ABC123'.split(''), colors: colorsSplit25To75 };
+  }
+  const baseConfigLevels4To6 = {
+    tilesPerTick: 3,
+    tickTime: 18,
+    numberOfPreGameTicks: 5,
+    colors: colorsSplit25To75
+  }
+  if (level === 4) {
+    return { ...baseConfigLevels4To6, letters: 'abcABC123'.split('') };
+  }
+  if (level === 5) {
+    return { ...baseConfigLevels4To6, letters: [
+      'abcABC123'.repeat(2),
+      '_-'
+    ].join('').split('') };
+  }
+  const advancedLetters = [
+    'abcABC123'.repeat(4),
+    '-_'.repeat(2),
+    '+^$'
+  ].join('').split('');
+  if (level === 6) {
+    return { ...baseConfigLevels4To6, letters: advancedLetters };
+  }
+  return {
+    tilesPerTick: 3,
+    tickTime: Math.max(10, 23 - level),
+    numberOfPreGameTicks: level,
+    colors: level < 10 ? colorsSplit30To70 : colorsSplit30To60To10,
+    letters: advancedLetters,
+  }
 }

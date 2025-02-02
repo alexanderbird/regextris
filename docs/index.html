@@ -11,7 +11,7 @@
 </head>
 <body>
   <header>
-    <h1>RegExtris</h1>
+    <h1>RegExtris Level <span class='data__current-level'></span></h1>
     <p>Eliminate the falling tiles in real-time with your sweet RegEx skills.</p>
   </header>
   <section class="instructions">
@@ -56,10 +56,14 @@
       <div class="board__column"></div>
       <div class="board__column"></div>
       <div class="board__column"></div>
-      <div class="board__you-win"><span>You Win! 🎉</span></div>
+      <div class="board__you-win">
+        <span>You Win! 🎉</span>
+        <button class='play-next-level'>Play level <span class='data__next-level'></span></button>
+        <button class='play-first-level'>Reset To First Level</button>
+      </div>
     </div>
     <div class="input">
-      <input type="text" placeholder="[Aa1]*" autofocus></input>
+      <input type="text" placeholder=".*" autofocus></input>
     </div>
   </section>
 </body>
