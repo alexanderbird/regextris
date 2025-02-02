@@ -16,3 +16,14 @@ according to the ancient traditions of the interwebs.
 To preview locally, clone the repo and open the HTML file in your browser.
 
 That's it.
+
+## Alternatives
+
+I didn't do a web search before making this, but apparently someone else had the
+same idea years ago, and also named theirs "regextris" 😮. I did not mean to
+take the same name.
+
+Link: https://github.com/SA3-Games/RegExtris
+
+I'll probably rename mine to something else.
+
