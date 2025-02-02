@@ -134,7 +134,7 @@ function checkForEndGame() {
 function getGameConfiguration() {
   const COLOR_1 = { id: 1, foreground: '#FFFEF8', background: '#AF47D2' };
   const COLOR_2 = { id: 2, foreground: '#5D0E41', background: '#FF8F00' };
-  const COLOR_3 = { id: 2, foreground: '#EAFAEA', background: '#780C28' };
+  const COLOR_3 = { id: 3, foreground: '#EAFAEA', background: '#780C28' };
   const colorsSplit25To75 = [COLOR_1, COLOR_1, COLOR_1, COLOR_2];
   const colorsSplit30To70 = [COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_2, COLOR_2, COLOR_2];
   const colorsSplit30To60To10 = [COLOR_3, COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_1, COLOR_2, COLOR_2, COLOR_2];
@@ -175,11 +175,14 @@ function getGameConfiguration() {
   if (level === 6) {
     return { ...baseConfigLevels4To6, letters: advancedLetters };
   }
-  return {
+  const baseConfigLevels7AndUp = {
     tilesPerTick: 3,
     tickTime: Math.max(10, 23 - level),
     numberOfPreGameTicks: level,
-    colors: level < 10 ? colorsSplit30To70 : colorsSplit30To60To10,
     letters: advancedLetters,
   }
+  if (level === 7 || level === 8) {
+    return { ...baseConfigLevels7AndUp, colors: colorsSplit30To70 }
+  }
+  return { ...baseConfigLevels7AndUp, colors: colorsSplit30To60To10 }
 }
