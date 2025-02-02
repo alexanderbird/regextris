@@ -1,11 +1,14 @@
 window.addEventListener('DOMContentLoaded', main);
 const tilesPerTick = 4;
 const tickTime = 20;
-const letters = 'abcABC123abcABC123abcABC123-'.split('');
+const letters = [
+  'abcABC123'.repeat(4),
+  '-_'.repeat(2),
+  '+^$'
+].join('').split('')
 const colors = [
-  { id: 1, foreground: '#FFFF80', background: '#26355D' },
-  { id: 2, foreground: '#FFFEF8', background: '#AF47D2' },
-  { id: 3, foreground: '#5D0E41', background: '#FF8F00' },
+  { id: 1, foreground: '#FFFEF8', background: '#AF47D2' },
+  { id: 2, foreground: '#5D0E41', background: '#FF8F00' },
 ]
 
 const ENTER_KEY_CODE = 13;
