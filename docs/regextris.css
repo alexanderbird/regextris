@@ -1,8 +1,8 @@
 body {
   --square: 12px;
   --gap: 2px;
-  --rows: 24;
-  --columns: 24;
+  --rows: 32;
+  --columns: 12;
   --column-width: calc(var(--square) + calc(5 * var(--gap)));
   min-height: 100vh;
   display: grid;
@@ -126,7 +126,7 @@ header h1 {
   }
 }
 .input {
-  font-size: 40px;
+  font-size: 32px;
   padding: 12px;
   border-radius: 8px;
 }
