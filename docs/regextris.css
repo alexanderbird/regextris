@@ -7,11 +7,24 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template-areas:
-    'header       header'
-    'instructions game'
-    'footer       footer';
-  grid-template-rows: auto 1fr;
-  grid-template-columns: 1fr 1fr;
+    'header'
+    'game'
+    '.'
+    'instructions'
+    'footer';
+  grid-template-rows: auto auto 50px auto auto;
+  grid-template-columns: auto;
+}
+
+@media (min-width: 700px) {
+  body {
+    grid-template-areas:
+      'header       header'
+      'instructions game'
+      'footer       footer';
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 header {
