@@ -39,15 +39,10 @@ function getMatchedTiles() {
   const regex = parseRegex(document.querySelector('.input input').value);
   if (regex) {
     const bottomRow = columns.map(x => x.querySelector('.tile')?.textContent || ' ').join('');
-    const matches = bottomRow.match(regex) || [];
-    const matchIndices = Array.from(new Set(matches
-      .reduce((result, match) => {
-        const currentCursor = result.length ? result[0] + 1 : 0;
-        const matchIndex = bottomRow.indexOf(match, currentCursor);
-        match.split('').map((_, i) => result.unshift(matchIndex + i));
-        return result;
-      }, [])
-    ));
+    let matches = Array.from(bottomRow.matchAll(regex));
+    const matchIndices = matches
+      .map(x => x.toString().split('').map((_, i) => x.index + i))
+      .flat();
     const matchedTiles = matchIndices
       .map(index => ({ column: columns[index], tile: columns[index].querySelector('.tile') }))
       .filter(x => !!x.tile);
