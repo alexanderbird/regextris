@@ -87,7 +87,7 @@ function onTick() {
     column.appendChild(tile);
     setTimeout(() => {
       tile.classList.remove('tile--new');
-    });
+    }, 30);
   }
 }
 
