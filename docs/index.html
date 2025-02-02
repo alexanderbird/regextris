@@ -2,89 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>RegExtris (a coding mini game)</title>
+  <title>Regex Tiles (a coding mini game)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟨</text></svg>">
-  <link rel="stylesheet" href="./regextris.css"></link>
-  <script src='./regextris.js'></script>
+  <link rel="stylesheet" href="./regex-tiles.css"></link>
+  <script src='./regex-tiles.js'></script>
 
-  <meta name="title" content="RegExtris (a coding mini game)" />
+  <meta name="title" content="Regex Tiles (a coding mini game)" />
   <meta name="description" content="Eliminate the falling tiles in real-time with your sweet RegEx skills." />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://alexanderbird.github.io/regextris/" />
-  <meta property="og:title" content="RegExtris (a coding mini game)" />
+  <meta property="og:url" content="https://alexanderbird.github.io/regextiles/" />
+  <meta property="og:title" content="Regex Tiles (a coding mini game)" />
   <meta property="og:description" content="Eliminate the falling tiles in real-time with your sweet RegEx skills." />
-  <meta property="og:image" content="https://alexanderbird.github.io/regextris/regextris.jpg" />
+  <meta property="og:image" content="https://alexanderbird.github.io/regextiles/regex-tiles.jpg" />
 
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://alexanderbird.github.io/regextris/" />
-  <meta property="twitter:title" content="RegExtris (a coding mini game)" />
+  <meta property="twitter:url" content="https://alexanderbird.github.io/regextiles/" />
+  <meta property="twitter:title" content="Regex Tiles (a coding mini game)" />
   <meta property="twitter:description" content="Eliminate the falling tiles in real-time with your sweet RegEx skills." />
-  <meta property="twitter:image" content="https://alexanderbird.github.io/regextris/regextris.jpg" />
+  <meta property="twitter:image" content="https://alexanderbird.github.io/regextiles/regex-tiles.jpg" />
 
 </head>
 <body>
-  <header>
-    <h1>RegExtris Level <span class='data__current-level'></span></h1>
-    <p>Eliminate the falling tiles in real-time with your sweet RegEx skills.</p>
-  </header>
-  <section class="instructions">
-    <h2>Gameplay</h2>
-    <ul>
-      <li>Type some RegEx to match tiles</li>
-      <li>You're matching against the bottom row</li>
-      <li>Empty columns are treated as spaces</li>
-      <li>You're only allowed to match tiles of one color at a time</li>
-      <li>If you match more than one color, your match is invalid</li>
-      <li>Your regex is applied when the timer expires or when you press Enter</li>
-    </ul>
-    <h2>Regular Expressions</h2>
-    <ul>
-      <li>Use <code>.</code> to match any character</li>
-      <li>Use <code>\d</code> to match any digit</li>
-      <li>Use <code>[]</code> to describe a character class</li>
-      <li>Use a range within a character class (e.g. match abcd with <code>[a-d]</code>)</li>
-      <li>Common character class ranges: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code></li>
-      <li>A character class can have several ranges (e.g. match any alphanumeric with <code>[A-Za-z0-9]</code></li>
-      <li>Use <code>^</code> inside square braces to negate a character class to match everything except (e.g. match efgh with <code>[^a-d]</code>)
-      <li>Use <code>+</code> to repeat a character one or more times (e.g. match aaaaaa with <code>a+</code></li>
-      <li>Use <code>*</code> to repeat a character zero or more times (e.g. match aaaaaa or the empty string with <code>a+</code></li>
-      <li>Use <code>{n}</code> to repeat a character n times (e.g. match aaaaaa with <code>a{6}</code></li>
-      <li>Use <code>^</code> to match the start of the line (e.g. match the first a with <code>^a</code></li>
-      <li>Use <code>$</code> to match the end of the line (e.g. match the last a with <code>a$</code></li>
-      <li>Use <code>|</code> to match one thing or another (e.g. match this or that with <code>this|that</code>)</li>
-      <li>Use <code>\X</code> to escape some character X (e.g. match $ with <code>\$</code>)</li>
-    </ul>
-    <button class='play-first-level'>Reset To The First Level</button>
-  </section>
-  <section class="game">
-    <div class="timer"><div class="timer__slider"></div></div>
-    <div class="board">
-      <div class="board__column"></div>
-      <div class="board__column"></div>
-      <div class="board__column"></div>
-      <div class="board__column"></div>
-      <div class="board__column"></div>
-      <div class="board__column"></div>
-      <div class="board__column"></div>
-      <div class="board__column"></div>
-      <div class="board__column"></div>
-      <div class="board__column"></div>
-      <div class="board__column"></div>
-      <div class="board__column"></div>
-      <div class="board__you-win">
-        <span>You Win! 🎉</span>
-        <button class='play-next-level'>Play level <span class='data__next-level'></span></button>
-      </div>
-    </div>
-    <div class="input">
-      <input type="text" placeholder=".*" autofocus></input>
-    </div>
-  </section>
-  <footer>
-    Created by <a href="https://alexanderbird.software">Alexander Bird</a>. Open Source <a href="https://github.com/alexanderbird/regextris">on GitHub.</a>
-  </footer>
+  <p>301: Moved permanently to <a href="https://alexanderbird.github.io/regextiles/">alexanderbird.github.io/regextiles</a>.</p>
+  <script>
+    window.location.href = "https://alexanderbird.github.io/regextiles/"
+  </script>
 </body>
 </html>
