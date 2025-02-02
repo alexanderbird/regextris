@@ -65,11 +65,10 @@ function onTick() {
     onInputChange();
   }
 
-  const timer = document.querySelector('.timer');
-  timer.classList.add('timer--no-transitions');
-  setTimeout(() => timer.classList.add('timer--tick'), 0);
-  setTimeout(() => timer.classList.remove('timer--no-transitions'), 10);
-  setTimeout(() => timer.classList.remove('timer--tick'), 20);
+  const timerSlider = document.querySelector('.timer__slider');
+  timerSlider.style.animation = 'none';
+  timerSlider.offsetHeight;
+  timerSlider.style.animation = null; 
   for (let i = 0; i < tilesPerTick; i++) {
     const column = pick(columns);
     const tile = document.createElement('div');

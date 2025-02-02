@@ -77,21 +77,23 @@ body > *:last-child {
   width: calc(var(--columns) * var(--column-width));
   position: relative;
   border-radius: var(--square);
-  overflow: hidden;
+  background-color: #2222;
 }
-.timer:after {
+.timer__slider {
   content: '';
   position: absolute;
-  width: 0;
   height: 100%;
-  background-color: blue;
-  transition: width var(--tick-time);
+  background-color: #07479999;
+  border-radius: inherit;
+  animation: var(--tick-time) timer linear;
 }
-.timer--no-transitions:after {
-  transition: none;
-}
-.timer--tick:after {
-  width: 100%;
+@keyframes timer {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
 }
 .input {
   font-size: 40px;
