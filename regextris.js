@@ -2,11 +2,13 @@ window.addEventListener('DOMContentLoaded', main);
 const tilesPerTick = 5;
 const hazardRatio = 0.25;
 const consequenceTilesPerHazard = 5;
+const tickTime = 10;
 
 function main() {
+  document.body.style.setProperty('--tick-time', `${tickTime}s`);
   setInterval(() => {
     onTick();
-  }, 4 * 1000);
+  }, tickTime * 1000);
   onTick();
 }
 
