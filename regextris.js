@@ -14,13 +14,13 @@ function main() {
     onTick();
   }, tickTime * 1000);
   onTick();
+  document.querySelector('.input input').addEventListener('keyup', x => onInputChange());
 }
 
 const letters = 'aA1'.split('');
 
-function onTick() {
+function getMatchedTiles() {
   const columns = Array.from(document.querySelectorAll('.board__column'));
-
   const regex = parseRegex(document.querySelector('.input input').value.trim());
   if (regex) {
     const bottomRow = columns.map(x => x.querySelector('.tile')?.textContent || ' ').join('');
@@ -38,12 +38,19 @@ function onTick() {
       .filter(x => !!x.tile);
 
     const matchedColors = Array.from(new Set(matchedTiles.map(x => x.tile.dataset.color)));
-    if (matchedColors.length > 1) {
-      console.log('multicolor match; doing nothing');
-    } else {
-      matchedTiles.forEach(({ column, tile }) => column.removeChild(tile));
-    }
+    return { matchedTiles, matchedColors };
+  }
+  return { matchedTiles: [], matchedColors: [] };
+}
 
+function onTick() {
+  const columns = Array.from(document.querySelectorAll('.board__column'));
+
+  const { matchedColors, matchedTiles } = getMatchedTiles();
+  if (matchedColors.length === 1) {
+    matchedTiles.forEach(({ column, tile }) => column.removeChild(tile));
+    document.querySelector('.input input').value = '';
+    onInputChange();
   }
 
   const timer = document.querySelector('.timer');
@@ -68,7 +75,18 @@ function onTick() {
       tile.classList.remove('tile--new');
     });
   }
-  document.querySelector('.input input').value = '';
+}
+
+function onInputChange() {
+  Array.from(document.querySelectorAll('.board__column')).forEach(column => column.classList.remove('board__column--selected'));
+  document.querySelector('.game').classList.remove('game--too-many-colors');
+  const { matchedTiles, matchedColors } = getMatchedTiles();
+  if (matchedColors.length > 1) {
+    document.querySelector('.game').classList.add('game--too-many-colors');
+  }
+  matchedTiles.forEach(({ tile, column }) => {
+    column.classList.add('board__column--selected');
+  });
 }
 
 function pick(list) {
@@ -81,5 +99,4 @@ function parseRegex(text) {
   } catch(ignored) {
     return false;
   }
-
 }

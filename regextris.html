@@ -7,14 +7,14 @@
   <meta name="description" content="" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟨</text></svg>">
 </head>
-<body>
+<body class='game'>
   <style>
     body {
       --square: 12px;
       --gap: 2px;
       --rows: 24;
       --columns: 24;
-      --column-width: calc(var(--square) + calc(4 * var(--gap)));
+      --column-width: calc(var(--square) + calc(5 * var(--gap)));
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -59,6 +59,28 @@
       min-width: var(--column-width);
       display: flex;
       flex-direction: column-reverse;
+      position: relative;
+      --underline-unit: 4px;
+      margin-bottom: calc(2 * var(--underline-unit));
+    }
+    .board__column:after {
+      content: '';
+      position: absolute;
+      width: 80%;
+      height: var(--underline-unit);
+      --underline-color: transparent;
+      background-color: var(--underline-color);
+      margin: auto;
+      bottom: calc(-2 * var(--underline-unit));
+      left: 0;
+      right: 0;
+      border-radius: 2px;
+    }
+    .board__column--selected:after {
+      --underline-color: #00FFD1;
+    }
+    .game--too-many-colors .board__column--selected:after {
+      --underline-color: #F0153E;
     }
     .timer {
       height: var(--square);
@@ -82,9 +104,10 @@
     .timer--tick:after {
       width: 100%;
     }
-    .input input,
     .input {
       font-size: 40px;
+      padding: 12px;
+      border-radius: 8px;
     }
     .input:before {
       content: '/';
@@ -101,9 +124,14 @@
       outline: 0;
       width: 6em;
       font-family: monospace;
+      background-color: transparent;
+      font-size: inherit;
     }
     .input input:focus {
       border-color: blue;
+    }
+    .game.game--too-many-colors .input {
+      background-color: #A0153E22
     }
   </style>
   <div class="board">
