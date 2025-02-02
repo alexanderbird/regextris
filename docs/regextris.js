@@ -8,8 +8,8 @@ function main() {
   document.body.style.setProperty('--tick-time', `${tickTime}s`);
   document.querySelector('.data__current-level').textContent = level;
   document.querySelector('.data__next-level').textContent = level + 1;
-  document.querySelector('.board__you-win .play-next-level').addEventListener('click', playNextLevel);
-  document.querySelector('.board__you-win .play-first-level').addEventListener('click', playFirstLevel);
+  Array.from(document.querySelectorAll('.play-next-level')).forEach(x => x.addEventListener('click', playNextLevel));
+  Array.from(document.querySelectorAll('.play-first-level')).forEach(x => x.addEventListener('click', playFirstLevel));
   let interval = startGameLoop();
   for (let i = 0; i < numberOfPreGameTicks; i++) {
     onTick({ firstTick: true });
@@ -164,13 +164,13 @@ function getGameConfiguration() {
   if (level === 5) {
     return { ...baseConfigLevels4To6, letters: [
       'abcABC123'.repeat(2),
-      '_-'
+      '_-,'
     ].join('').split('') };
   }
   const advancedLetters = [
     'abcABC123'.repeat(4),
-    '-_'.repeat(2),
-    '+^$'
+    '-_,'.repeat(2),
+    '+^$.'
   ].join('').split('');
   if (level === 6) {
     return { ...baseConfigLevels4To6, letters: advancedLetters };
